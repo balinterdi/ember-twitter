@@ -1,0 +1,34 @@
+.mini-profile div {
+  font-size: 1em;
+  display: inline-block;
+}
+
+.mini-profile img {
+  vertical-align: top;
+}
+
+.mini-profile a {
+  text-decoration: none;
+}
+
+.mini-profile .name {
+  margin-left: 1em;
+  color: #222;
+}
+
+.mini-profile .profile-num {
+  display: block;
+}
+
+.mini-profile .row {
+  margin-top: 1.25em;
+}
+
+.mini-profile .row div {
+  padding-left: 0.6em;
+  border-right: 1px solid #d9d9d9;
+}
+
+.mini-profile .row div.last {
+  border: 0;
+}
