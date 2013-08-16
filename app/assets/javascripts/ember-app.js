@@ -1,10 +1,24 @@
 window.App = Ember.Application.create();
 
 App.Router.map(function() {
-  this.route('home');
+  this.resource('user', function() {
+    this.route('home');
+  });
 });
 
-App.HomeRoute = Ember.Route.extend({
+App.IndexRoute = Ember.Route.extend({
+  redirect: function() {
+    return this.transitionTo('user.home');
+  }
+});
+
+App.UserRoute = Ember.Route.extend({
+  model: function() {
+    return Ember.$.getJSON('/user.json');
+  }
+});
+
+App.UserHomeRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('/home.json');
   }
