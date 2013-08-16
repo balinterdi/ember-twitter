@@ -3,7 +3,8 @@ window.App = Ember.Application.create();
 App.Router.map(function() {
   this.resource('user', function() {
     this.route('home');
-  });
+    this.route('timeline', { path: '/timelines/:screen_name' });
+  })
 });
 
 App.IndexRoute = Ember.Route.extend({
@@ -21,6 +22,12 @@ App.UserRoute = Ember.Route.extend({
 App.UserHomeRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('/home.json');
+  }
+});
+
+App.UserTimelineRoute = Ember.Route.extend({
+  model: function(params) {
+    return Ember.$.getJSON('/timelines/' + params.screen_name + '.json');
   }
 });
 
@@ -54,4 +61,13 @@ Ember.Handlebars.helper('html', function(tweet, options) {
   });
 
   return new Handlebars.SafeString(withUrls);
+});
+
+App.TimelineLinkView = Ember.View.extend({
+  tagName: 'span',
+  layout: Ember.Handlebars.compile('<a {{bindAttr href=view.link}}>{{yield}}</a>'),
+
+  link: function() {
+    return "#/user/timelines/" + this.get('name');
+  }.property('name')
 });
